@@ -1,4 +1,4 @@
-=kinet.py=
+# kinet.py
 
 <img src="http://i.imgur.com/StIq4To.jpg" />
 
@@ -6,7 +6,7 @@ This is a simple object oriented python interface for Color Kinetics "kinet"
 protocol, written by Giles Hall.  It is used to drive color kinetics lights
 over ethernet.  It is pretty easy to get started with.
 
-==PowerSupply==
+## PowerSupply
 
 A PowerSupply class is an encapsulation of a network attached Color Kinetics
 power supply, such as the PDS-150e.  The PowerSupply class handles building a
@@ -22,7 +22,7 @@ PowerSupply object:
 >>> pds = PowerSupply("192.168.1.120")
 </pre>
 
-==Fixture==
+## Fixture
 
 A fixture is an encapsulation of a single, addressable light fixture.
 Currently, there is only one Fixture type supported, and that is an RGB
@@ -37,30 +37,30 @@ example on how to do this.
 Fixtures are constructed on their lowest DMX address value.  For example, if a
 RGB fixture spans (3,4,5), you would build the fixture object on 3 like so: 
 
-<pre>
+```
 >>> fix = FixtureRGB(3)
-</pre>
+```
 
 The PowerSupply class inherits from list.  To bind a fixture to a PowerSupply,
 all you need to do is append it:
 
-<pre>
+```
 >>> pds = PowerSupply("192.168.1.120")
 >>> fix = FixtureRGB(3)
 >>> pds.append(fix)
-</pre>
+```
 
 To change a value on the lights, you would simply tell the PowerSupply to go():
 
-<pre>
+```
 >>> pds = PowerSupply("192.168.1.120")
 >>> fix = FixtureRGB(3)
 >>> pds.append(fix)
 >>> pds[0].rgb = (255, 0, 0)
 >>> pds.go()
-</pre>
+```
 
-==FadeIter==
+## FadeIter
 
 FadeIter is a convenience class to allow smooth transitions between two
 different scenes.  It will fade all the 512 channels between two different
@@ -68,16 +68,16 @@ scenes for a duration of time.  For example, if we wanted to fade the first
 fixture from all off to entirely on over a ten second period, we would simply
 write the following:
 
-<pre>
+```
 >>> pds1 = PowerSupply("192.168.1.120")
 >>> pds1.append(fix)
 >>> pds2 = pds1.copy()
 >>> pds2[0].rgb = (255, 255, 255)
 >>> fi = FadeIter(pds1, pds2, 10)
 >>> fi.go()
-</pre>
+```
 
-==Examples of kinet.py in the Wild==
+## Examples of kinet.py in the Wild
 
 A group of students from Drexel used kinet.py to drive a
 [http://arstechnica.com/gaming/2013/04/selling-coding-and-playing-the-worlds-largest-videogame/ 30-story version of Pong in Philadelphia].
@@ -86,9 +86,8 @@ A group of students from Drexel used kinet.py to drive a
 C++ to drive a ColorKinetics video wall of LEDs.  You can find it within his
 [https://github.com/Dewb/alphadep alphadep] project.
 
-==Dedication==
+## Dedication
 
 This library is dedicated to the memory of Kevin "Frostbyte" McCormick, a
 brilliant light artist who continues to be a source of inspiriation for the
 EE/LED community at large.
-
