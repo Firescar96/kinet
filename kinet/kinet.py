@@ -287,7 +287,7 @@ class PowerSupply(list):
                 data[addr + idx] = val
         data = str(self.header) + struct.pack('512B', *data)
         self.socket.send(data)
-    
+
 class Fixture(object):
     def __init__(self, address):
         self.address = address
@@ -340,20 +340,20 @@ class FixtureRGB(Fixture):
     def __str__(self):
         return '[%03d %03d %03d]' % tuple(self)
 
-    def get_red(self): 
+    def get_red(self):
         return self._red
     def set_red(self, val):
         self._red = max(self._RED[0], min(self._RED[1], int(val)))
     red = property(get_red, set_red)
 
-    def get_green(self): 
+    def get_green(self):
         return self._green
     def set_green(self, val):
         self._green = max(self._GRN[0], min(self._GRN[1], int(val)))
     green = property(get_green, set_green)
     grn = property(get_green, set_green)
 
-    def get_blue(self): 
+    def get_blue(self):
         return self._blue
     def set_blue(self, val):
         self._blue = max(self._BLU[0], min(self._BLU[1], int(val)))
@@ -363,15 +363,15 @@ class FixtureRGB(Fixture):
     def get_rgb(self):
         return (self.red, self.green, self.blue)
     def set_rgb(self, rgb):
-        self.red = rgb[0]
-        self.green = rgb[1]
-        self.blue = rgb[2]
+        self.red = (self._RED[1] * rgb[0])
+        self.green = (self._GRN[1] * rgb[1])
+        self.blue = (self._BLU[1] * rgb[2])
     rgb = property(get_rgb, set_rgb)
 
     def get_hsv(self):
-        red = self.red / float(self._RED[1]) 
-        green = self.green / float(self._GRN[1]) 
-        blue = self.blue / float(self._BLU[1]) 
+        red = self.red / float(self._RED[1])
+        green = self.green / float(self._GRN[1])
+        blue = self.blue / float(self._BLU[1])
         rgb = (red, green, blue)
         hsv = colorsys.rgb_to_hsv(*rgb)
         return hsv

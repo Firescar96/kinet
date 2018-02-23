@@ -1,9 +1,9 @@
 from setuptools import setup
- 
+
 setup(
     name = 'kinet',
     description = 'library for controlling color kinetics lights',
-    version = '0.2.0',
+    version = '0.3.0',
     packages = ['kinet'],
     author='Nchinda2',
     author_email='nchinda2@gmail.com',
